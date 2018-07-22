@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Filter App</title>
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+<body>
+	<!--Navbar from website -->
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+	  <div class="container">
+	  <a class="navbar-brand" href="https://shashwatuttam.github.io/">Shashwat Uttam</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item">
+	        <a class="nav-link" href="https://shashwatuttam.github.io/">Home</a>
+	      </li>
+	      <li class="nav-item active">
+	        <a class="nav-link" href="https://shashwatuttam.github.io/archives.html">Archives <span class="sr-only">(current)</span></a>
+	      </li>
+	    </ul>
+	  </div>
+	  </div>
+	</nav>
+
+	<!--Jumbotron-->
+	<div class="jumbotron jumbotron-fluid mb-0">
+	  <div class="container">
+	    <h1 class="display-4">Filter App</h1>
+	    <p class="lead">Applying Dog Filter on human faces using face detection and facial feature recognition.</p>
+	  </div>
+	</div>
+
+	<!--SlideShow-->
+	<div id="carouselExampleIndicators" class="carousel slide container" data-ride="carousel">
+	  <ol class="carousel-indicators">
+	    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+	    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+	    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+	    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+	  </ol>
+	  <div class="carousel-inner" style=" width:100%; height: 500px !important; background-color: grey"">
+	    <div class="carousel-item active">
+	      <img class="d-block w-100" src="{{url_for('static', filename = 'img3.png')}}" alt="First slide">
+	    </div>
+	    <div class="carousel-item">
+	      <img class="d-block w-100" src="{{url_for('static', filename = 'img9.jpg')}}" alt="Second slide">
+	    </div>
+	    <div class="carousel-item">
+	      <img class="d-block w-100" src="{{url_for('static', filename = 'img10.jpg')}}" alt="Third slide">
+	    </div>
+		<div class="carousel-item">
+	      <center><img class="d-block w-75" src="{{url_for('static', filename = 'img4.jpg')}}" alt="Fourth slide"></center>
+	    </div>
+	  </div>
+	  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </a>
+	  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </a>
+	</div>
+
+	<!--Text-->
+	<div class="container mt-2">
+		<br><center><h1>Choose an image!</h1></center>
+	</div>
+
+	<!--Form and preview-->
+	<div class="container">
+		<form class="form inline" action="/submit" method="POST" enctype="multipart/form-data">
+		<div class="row">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-9 form-group custom-file my-3">
+			  <label class="custom-file-label" for="imagefile" id="chooseLabel">Choose file</label>
+			  <input type="file" class="custom-file-input" name="imagefile" accept="image/*" onchange="preview(event)" required="true">
+			</div>
+			<div class="col-sm my-3">
+				<center><button class="btn btn-primary" type="Submit">Submit</button></center>
+			</div>
+		</div>
+		</form>
+
+		<div class="card container2" id="previewBox" style="width: 100%; height : 600px !important; background-color: white;">
+			<img id = "displayImage" src="#" class="image img-fluid h-100 w-auto mx-auto">
+			<div class="middle card-img-overlay">
+			    <h5 class="text card-title">Preview</h5>
+			</div>
+		</div>
+	</div>
+	<br>
+
+	<!--Footer-->
+	<footer class="footer">
+      <div class="container">
+        <span class="text-muted">&copy; Shashwat Uttam</span>
+      </div>
+    </footer>
+
+</body>
+</html>
